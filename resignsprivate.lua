@@ -1,5 +1,5 @@
 _G.aimlock = {
-    ["Key"] = "e",
+    ["Key"] = "q",
     ["Mode"] = "Toggle", -- "Toggle" or "Hold"
     ["Prediction"] = 0.14284, -- Lower for Lower Ping, Higher for Higher Ping
     ["Auto-Prediction"] = true, -- Kinda iffy

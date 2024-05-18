@@ -36,8 +36,8 @@ local Window = Rayfield:CreateWindow({
       _G.aimlock = {
          ["Key"] = "q",
          ["Mode"] = "Toggle", -- "Toggle" or "Hold"
-         ["Prediction"] = 0.12, -- Lower for Lower Ping, Higher for Higher Ping
-         ["Auto-Prediction"] = true, -- Kinda iffy
+         ["Prediction"] = 0.1324, -- Lower for Lower Ping, Higher for Higher Ping
+         ["Auto-Prediction"] = false, -- Kinda iffy
          ["Aimpart"] = "HumanoidRootPart", -- "Head", or any body part
          ["Smoothing"] = false,
          ["Smoothing-Amount"] = 0.5, -- Classic and New use different types of smoothing so you will have to adjust for each one
@@ -79,8 +79,8 @@ local Button = Tab:CreateButton({
       _G.aimlock = {
          ["Key"] = "q",
          ["Mode"] = "Toggle", -- "Toggle" or "Hold"
-         ["Prediction"] = 0.12, -- Lower for Lower Ping, Higher for Higher Ping
-         ["Auto-Prediction"] = true, -- Kinda iffy
+         ["Prediction"] = 0.1324, -- Lower for Lower Ping, Higher for Higher Ping
+         ["Auto-Prediction"] = false, -- Kinda iffy
          ["Aimpart"] = "HumanoidRootPart", -- "Head", or any body part
          ["Smoothing"] = false,
          ["Smoothing-Amount"] = 0.5, -- Classic and New use different types of smoothing so you will have to adjust for each one
@@ -113,97 +113,5 @@ local Button = Tab:CreateButton({
      }
      
      loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/Standalones/Aimlock", true))()
-   end,
-})
-
-local Button = Tab:CreateButton({
-   Name = "aimviewer (h)",
-   Callback = function()
-      _G.AimViewer = {
-         Key = "h", -- Toggle Key
-         FromEnemyPart = "HumanoidRootPart", -- looks for this part + starts at this part
-         VisualColor = Color3.fromRGB(255,255,255),
-         VisualRainbow = false, -- makes the part rainbow
-         VisualWidth = 1,
-         VisualTransparency = 0,
-         VisualMaterial = "ForceField",
-         VisibleCheck = false,
-         DownCheck = false,
-         FOVCheck = false,
-         FOVSize = 100,
-         FOVColor = Color3.fromRGB(119,0,255),
-         FOVRainbow = false,
-         FOVThickness = 2,
-         FOVFilled = false,
-         FOVTransparency = 1, -- 1=visible,0=nonvisible
-         NotificationToggle = false,
-         POVViewer = false,
-         AimViewSelf = false,
-         Highlight = {
-             Enabled = false,
-             UseFill = false,
-             FillColor = Color3.fromRGB(119,0,255),
-             FillTransparency = 0,
-             UseOutline = false,
-             OutlineColor = Color3.fromRGB(119,0,255),
-             OutlineTransparency = 0,
-             DepthMode = "AlwaysOnTop",
-         },
-     }
-     loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/Standalones/AimViewer", true))()
-   end,
-})
-
-local Button = Tab:CreateButton({
-   Name = "antilock (c)",
-   Callback = function()
-      _G.NRoll = {
-         Key = "C", -- Capital Letters 
-         KeyMode = "Toggle", -- "Hold"
-     
-         Presets = {
-             Enabled = true,
-             Mode = "Sky", -- "Hitbox Roll" "Extended Jitter" "Opposite Velocity" "Amplify Velocity" "Mouse" "Resolver Confuser (SEMI-BLATANT)" "Resolver Confuser (BLATANT)" "Sky","Underground" "Freeze Thing" "Lock on"
-             AmplifyMultiplier = 5,
-             ResolverConfuserSemi = {
-                 Jitter = 1,
-                 Divider = 100,
-             },
-             LockOnPred = 0.126, -- Lock on is activated when you press the enable key
-         },
-     
-         Velocity = {
-             On = false, -- Static = Values become your velocity, Additive = Values are added to your velocity, Subtractive = Values are subtracted from your velocity 
-             X = 0,
-             Y = 0, -- Disabled when using Directional
-             Z = 0, 
-             Multiplier = 1, -- When on Multiplicative mode, It uses this value to multiply your original velocity. Multiplicative will NOT use your custom Velocity Values
-             Directional = false,
-             Mode = "Static", -- Static, Additive, Subtractive, Multiplicative,
-         },
-     
-         CFrame = { -- Moves both the character they see and your hitbox (not desync) ( ur camera stays at the place u would be if u toggled off )
-             On = false,
-             X = 0,
-             Y = 0,
-             Z = 0,
-         },
-     
-         Angles = {
-             On = false,
-             X = 0,
-             Y = 0, -- Left / Right
-             Z = 0,
-             UseRNG = true, -- Converts numbers into mins/maxes
-         },
-     
-         Visuals = {
-             Dot = false, -- dont use mouse mode when using this option (will mess up)
-             TextIndicator = true,
-             StatsGUI = false,
-         }
-     }
-     
-     loadstring(game:HttpGet("https://nyulachan.github.io/nyula/Nyula/Roll", true))()
    end,
 })

@@ -38,15 +38,42 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/nyulachan/nyula/main/
 
 wait(1)
 
-while true do
-    heartbeat:Wait()
-    if target == true then
-        local character = game.Players[targetplr].Character.HumanoidRootPart
-        local lastPosition = character.Position
-        task.wait()
-        local currentPosition = character.Position
-        local velocity = (currentPosition - lastPosition) * 0
-        character.AssemblyLinerVelocity = velocity
-        character.Velocity = velocity
+local Players = game:GetService("Players")
+
+local function calculateVelocity(humanoid)
+    local lastPosition = humanoid.RootPart.Position
+    local lastTime = tick()
+
+    return function()
+        local currentPosition = humanoid.RootPart.Position
+        local currentTime = tick()
+        local deltaTime = currentTime - lastTime
+
+        local predictedVelocity = (currentPosition - lastPosition) / deltaTime
+
+        lastPosition = currentPosition
+        lastTime = currentTime
+
+        return predictedVelocity
     end
 end
+
+local function updateHumanoidVelocity(player)
+    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        local velocityFunc = calculateVelocity(humanoid)
+
+        humanoid:GetPropertyChangedSignal("RootPart"):Connect(function()
+            local velocity = velocityFunc()
+
+            humanoid.WalkSpeed = velocity.magnitude * 0.132
+            humanoid.MoveDirection = velocity.unit
+        end)
+    end
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+    updateHumanoidVelocity(player)
+end
+
+Players.PlayerAdded:Connect(updateHumanoidVelocity)
